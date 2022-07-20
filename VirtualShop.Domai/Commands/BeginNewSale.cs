@@ -12,35 +12,38 @@ namespace VirtualShop.Domain.Commands;
 
 public class BeginNewSale : Notifiable, ICommand
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public DateTime Date { get; set; }
-    public Items Items { get; set; }
+    public Items Item { get; set; }
+    public Products Product { get; set; }
     public double TotalSaleValue { get; set; }
     public double TotalSalePaid { get; set; }
     public double SaleChange { get; set; }
     public SaleStatus SaleStatus { get; set; }
-    public BeginNewSale()
-    {
-    }
 
-    public BeginNewSale(Guid id, DateTime date, Items items, double totalSaleValue, double totalSalePaid, double saleChange)
+    public BeginNewSale(int id, DateTime date, Items item, Products product, double totalSaleValue, double totalSalePaid, double saleChange, SaleStatus saleStatus)
     {
         Id = id;
         Date = date;
-        Items = items;
+        Item = item;
+        Product = product;
         TotalSaleValue = totalSaleValue;
         TotalSalePaid = totalSalePaid;
         SaleChange = saleChange;
+        SaleStatus = saleStatus;
     }
 
+    public BeginNewSale()
+    {
+    }
+    
     public void Validate()
     {
         AddNotifications(
             new Contract()
-                .Requires()
-                .AreNotEquals(Items, 0, "Items", "To start a sale you should pick up at least one item")
-                .IsLowerThan(TotalSaleValue, 0, "TotalSaleValue", "Total value should be higher than 0")
-                .IsLowerThan(TotalSalePaid, 0, "TotalSalePaid", "Total value paid should be higher than 0")
+                .Requires()              
+                .IsGreaterThan(TotalSaleValue, 0, "TotalSaleValue", "Total value should be higher than 0")
+                .IsGreaterThan(TotalSalePaid, 0, "TotalSalePaid", "Total value paid should be higher than 0")
        );
     }
 }

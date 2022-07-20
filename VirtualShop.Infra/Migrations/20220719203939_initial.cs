@@ -5,15 +5,31 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VirtualShop.Infra.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Items",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Quantity = table.Column<double>(type: "float", nullable: false),
+                    UnityPrice = table.Column<double>(type: "float", nullable: false),
+                    Total = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Items", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UnitPrice = table.Column<double>(type: "float", nullable: false),
                     StockQuantity = table.Column<double>(type: "float", nullable: false)
@@ -24,33 +40,14 @@ namespace VirtualShop.Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Items",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<double>(type: "float", nullable: false),
-                    UnityPrice = table.Column<double>(type: "float", nullable: false),
-                    Total = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Items", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Items_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Sales",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ItemsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ItemsId = table.Column<int>(type: "int", nullable: false),
+                    ProductsId = table.Column<int>(type: "int", nullable: false),
                     TotalSaleValue = table.Column<double>(type: "float", nullable: false),
                     TotalSalePaid = table.Column<double>(type: "float", nullable: false),
                     SaleChange = table.Column<double>(type: "float", nullable: false),
@@ -65,17 +62,23 @@ namespace VirtualShop.Infra.Migrations
                         principalTable: "Items",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Sales_Products_ProductsId",
+                        column: x => x.ProductsId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Items_ProductId",
-                table: "Items",
-                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sales_ItemsId",
                 table: "Sales",
                 column: "ItemsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sales_ProductsId",
+                table: "Sales",
+                column: "ProductsId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

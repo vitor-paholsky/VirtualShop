@@ -2,6 +2,8 @@
 using Flunt.Validations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,15 +13,14 @@ namespace VirtualShop.Domain.Entities;
 
 public class Items 
 {
-    public Guid Id { get; set; }
-    public Products Product { get; set; }
+    public int Id { get; set; }
     public double  Quantity { get; set; }
     public double UnityPrice { get; set; }
     public double Total { get; set; }
 
-    public Items(Guid id, double quantity, double unityPrice, double total)
+    public Items(int id, double quantity, double unityPrice, double total)
     {
-        Id = id;
+        Id = id;     
         Quantity = quantity;
         UnityPrice = unityPrice;
         Total = total;

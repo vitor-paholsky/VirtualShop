@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VirtualShop.Domain.Commands;
 using VirtualShop.Domain.Entities;
 using VirtualShop.Domain.Queries;
 using VirtualShop.Domain.Repositories;
@@ -37,7 +38,7 @@ public class SaleRepository : ISaleRepository
         _context.SaveChanges();
     }      
 
-    public Sales GetById(Guid id)
+    public Sales GetById(int id)
     {
         return _context.Sales.FirstOrDefault(x => x.Id == id);
     }

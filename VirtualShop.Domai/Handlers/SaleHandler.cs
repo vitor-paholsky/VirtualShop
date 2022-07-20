@@ -19,13 +19,11 @@ public class SaleHandler : Notifiable,
     IHandler<IncludeItemsToTheSale>
 
 {
-    private readonly ISaleRepository _saleRepository;
-    private readonly IProductsRepository _productRepository;
+    private readonly ISaleRepository _repository;
 
-    public SaleHandler(ISaleRepository saleRepository, IProductsRepository productRepository)
+    public SaleHandler(ISaleRepository repository)
     {
-        _saleRepository = saleRepository;
-        _productRepository = productRepository;
+        _repository = repository;
     }
 
     public ICommandResult Handle(BeginNewSale command)
@@ -37,13 +35,15 @@ public class SaleHandler : Notifiable,
         var sale = new Sales(
             command.Id,
             command.Date,
+            command.Item,
+            command.Product,
             command.TotalSaleValue,
             command.TotalSalePaid,
             command.SaleChange,
             command.SaleStatus = (SaleStatus)1
             );
 
-        _saleRepository.Create(sale);
+        _repository.Create(sale);
 
         return new CommandResult(true, "Sale started successfully", sale);
     }
@@ -57,13 +57,15 @@ public class SaleHandler : Notifiable,
         var sale = new Sales(
             command.Id,
             command.Date,
+            command.Item,
+            command.Product,
             command.TotalSaleValue,
             command.TotalSalePaid,
             command.SaleChange,
             command.SaleStatus = (SaleStatus)1
             );
 
-        _saleRepository.Create(sale);
+        _repository.Create(sale);
 
         return new CommandResult(true, "Sale started successfully", sale);
     }

@@ -27,6 +27,7 @@ public class ProductRepository : IProductsRepository
 
     public void Update(Products product)
     {
+        _context.ChangeTracker.Clear();
         _context.Products.Update(product);
         _context.SaveChanges();
     }
@@ -37,7 +38,7 @@ public class ProductRepository : IProductsRepository
         _context.SaveChanges();
     }
 
-    public Products GetProductById(Guid id)
+    public Products GetProductById(int id)
     {
         return _context.Products.FirstOrDefault(x => x.Id == id);
     }

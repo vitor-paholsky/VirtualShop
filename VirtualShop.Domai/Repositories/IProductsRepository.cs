@@ -12,6 +12,6 @@ public interface IProductsRepository
     void Create(Products products);
     void Update(Products products);
     void Delete(Products products);
-    Products GetProductById(Guid id);
-    IEnumerable<Products> GetByDescription(string user);
+    Products GetProductById(int id);
+    IEnumerable<Products> GetByDescription(string description);
 }

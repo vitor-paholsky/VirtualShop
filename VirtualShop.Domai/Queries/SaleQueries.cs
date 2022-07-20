@@ -15,12 +15,12 @@ public static class SaleQueries
         return x => x.Items == Items;
     }
 
-    public static Expression<Func<Sales, bool>> GetAllFinished(Guid Id)
+    public static Expression<Func<Sales, bool>> GetAllFinished(int Id)
     {
         return x => x.Id == Id && x.SaleStatus.Equals(2);
     }
 
-    public static Expression<Func<Sales, bool>> GetById(Guid Id)
+    public static Expression<Func<Sales, bool>> GetById(int Id)
     {
         return x => x.Id == Id;
     }

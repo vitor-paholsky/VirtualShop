@@ -19,34 +19,30 @@ public class SalesController : ControllerBase
 
         var products = new Products();
         {
-            products.Id = new Guid();
-            products.Description = command.Items.Product.Description;
-            products.UnitPrice = command.Items.Product.UnitPrice;
-            products.StockQuantity = command.Items.Product.StockQuantity;
+            products.Description = command.Product.Description;
+            products.UnitPrice = command.Product.UnitPrice;
+            products.StockQuantity = command.Product.StockQuantity;
             handler.Handle(command);
         }
 
         var items = new Items();
         {
-            items.Id = new Guid();
-            items.Product = command.Items.Product;
-            items.Quantity = command.Items.Quantity;
-            items.UnityPrice = command.Items.UnityPrice;
-            items.Total = command.Items.Total;
+            items.Quantity = command.Item.Quantity;
+            items.UnityPrice = command.Item.UnityPrice;
+            items.Total = command.Item.Total;
             handler.Handle(command);
-        }
 
-        var sales = new Sales();
-        {
-            sales.Id = new Guid();
-            sales.Date = new DateTime();
-            sales.Items = command.Items;
-            sales.TotalSaleValue = command.TotalSaleValue;
-            sales.TotalSalePaid = command.TotalSalePaid;
-            sales.SaleChange = command.SaleChange;
-            handler.Handle(command);
-        }
 
-        return (CommandResult)handler.Handle(command);
+            var sales = new Sales();
+            {
+                sales.Date = new DateTime();
+                sales.TotalSaleValue = command.TotalSaleValue;
+                sales.TotalSalePaid = command.TotalSalePaid;
+                sales.SaleChange = command.SaleChange;
+                handler.Handle(command);
+            }
+
+            return (CommandResult)handler.Handle(command);
+        }
     }
 }

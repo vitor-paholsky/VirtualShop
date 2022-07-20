@@ -12,8 +12,8 @@ using VirtualShop.Infra.Contexts;
 namespace VirtualShop.Infra.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220715184926_Initial")]
-    partial class Initial
+    [Migration("20220719203939_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,12 +26,11 @@ namespace VirtualShop.Infra.Migrations
 
             modelBuilder.Entity("VirtualShop.Domain.Entities.Items", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<double>("Quantity")
                         .HasColumnType("float");
@@ -44,16 +43,16 @@ namespace VirtualShop.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
-
                     b.ToTable("Items");
                 });
 
             modelBuilder.Entity("VirtualShop.Domain.Entities.Products", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -72,15 +71,20 @@ namespace VirtualShop.Infra.Migrations
 
             modelBuilder.Entity("VirtualShop.Domain.Entities.Sales", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("ItemsId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ItemsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
 
                     b.Property<double>("SaleChange")
                         .HasColumnType("float");
@@ -98,18 +102,9 @@ namespace VirtualShop.Infra.Migrations
 
                     b.HasIndex("ItemsId");
 
+                    b.HasIndex("ProductsId");
+
                     b.ToTable("Sales");
-                });
-
-            modelBuilder.Entity("VirtualShop.Domain.Entities.Items", b =>
-                {
-                    b.HasOne("VirtualShop.Domain.Entities.Products", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("VirtualShop.Domain.Entities.Sales", b =>
@@ -120,7 +115,15 @@ namespace VirtualShop.Infra.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("VirtualShop.Domain.Entities.Products", "Products")
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Items");
+
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

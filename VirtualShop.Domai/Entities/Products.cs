@@ -11,12 +11,12 @@ namespace VirtualShop.Domain.Entities;
 
 public class Products 
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public string Description { get; set; }
     public double UnitPrice { get; set; }
     public double StockQuantity { get; set; }
 
-    public Products(Guid id, string description, double unitPrice, double stockQuantity)
+    public Products(int id, string description, double unitPrice, double stockQuantity)
     {
         Id = id;
         Description = description;
@@ -26,5 +26,10 @@ public class Products
 
     public Products()
     {
+    }
+
+    public Products(int id)
+    {
+        Id = id;
     }
 }
