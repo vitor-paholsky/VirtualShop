@@ -24,12 +24,8 @@ public class SalesService : ISaleContract
         try
         {   
             var getStock = _repository.GetStock(stockQuantity);
-
-            foreach (var item in getStock)
-            {
-                _ = item.StockQuantity;                   
-            
-            };       
+                  
+           
          
             return getStock;
         }

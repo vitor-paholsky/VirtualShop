@@ -13,14 +13,14 @@ namespace VirtualShop.Domain.Commands;
 public class BeginNewSale : Notifiable, ICommand
 {
     public int Id { get; set; }
-    public Items Item { get; set; }
+    //public Items Item { get; set; }
     public DateTime Date { get; set; }
     public SaleStatus SaleStatus { get; set; }
 
-    public BeginNewSale(int id, Items item, DateTime date, SaleStatus saleStatus)
+    public BeginNewSale(int id, /*Items item,*/ DateTime date, SaleStatus saleStatus)
     {
         Id = id;
-        Item = item;
+      //  Item = item;
         Date = date;
         SaleStatus = saleStatus;
     }

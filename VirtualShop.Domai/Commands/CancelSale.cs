@@ -13,25 +13,15 @@ namespace VirtualShop.Domain.Commands;
 public class CancelSale : Notifiable, ICommand
 {  
 
-    public Guid Id { get; set; }
-    public DateTime Date { get; set; }
-    public Items Items { get; set; }
-    public decimal TotalSaleValue { get; set; }
-    public decimal TotalSalePaid { get; set; }
-    public decimal SaleChange { get; set; }
+    public int Id { get; set; }  
     public SaleStatus SaleStatus { get; set; }
     public CancelSale()
     {
     }
-
-    public CancelSale(Guid id, DateTime date, Items items, decimal totalSaleValue, decimal totalSalePaid, decimal saleChange)
+    public CancelSale(int id, SaleStatus saleStatus)
     {
         Id = id;
-        Date = date;
-        Items = items;
-        TotalSaleValue = totalSaleValue;
-        TotalSalePaid = totalSalePaid;
-        SaleChange = saleChange;
+        SaleStatus = saleStatus;
     }
 
     public void Validate()
@@ -39,9 +29,7 @@ public class CancelSale : Notifiable, ICommand
         AddNotifications(
             new Contract()
                 .Requires()
-                .AreNotEquals(Items, 0, "Items", "To start a sale you should pick up at least one item")
-                .IsLowerThan(TotalSaleValue, 0, "TotalSaleValue", "Total value should be higher than 0")
-                .IsLowerThan(TotalSalePaid, 0, "TotalSalePaid", "Total value paid should be higher than 0")
+                .AreEquals(1, 1, "SaleStatus", "Only sales with openned status can be cancelled")
        );
     }
 }

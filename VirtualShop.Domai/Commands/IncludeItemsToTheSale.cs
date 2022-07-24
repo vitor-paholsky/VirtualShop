@@ -17,23 +17,19 @@ public class IncludeItemsToTheSale : Notifiable, ICommand
     public Items Item { get; set; }
     public Products Product { get; set; }
     public decimal TotalSaleValue { get; set; }
-    public decimal TotalSalePaid { get; set; }
-    public decimal SaleChange { get; set; }
     public SaleStatus SaleStatus { get; set; }
 
     public IncludeItemsToTheSale()
     {
     }
 
-    public IncludeItemsToTheSale(int id, DateTime date, Items item, Products product, decimal totalSaleValue, decimal totalSalePaid, decimal saleChange, SaleStatus saleStatus)
+    public IncludeItemsToTheSale(int id, DateTime date, Items item, Products product, decimal totalSaleValue, SaleStatus saleStatus)
     {
         Id = id;
         Date = date;
         Item = item;
         Product = product;
         TotalSaleValue = totalSaleValue;
-        TotalSalePaid = totalSalePaid;
-        SaleChange = saleChange;
         SaleStatus = saleStatus;
     }
 
@@ -43,7 +39,6 @@ public class IncludeItemsToTheSale : Notifiable, ICommand
             new Contract()
                 .Requires()
                 .IsLowerThan(TotalSaleValue, 0, "TotalSaleValue", "Total value should be higher than 0")
-                .IsLowerThan(TotalSalePaid, 0, "TotalSalePaid", "Total value paid should be higher than 0")
        );
     }
 }

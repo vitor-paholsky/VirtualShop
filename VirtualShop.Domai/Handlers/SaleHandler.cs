@@ -14,8 +14,8 @@ namespace VirtualShop.Domain.Handlers;
 
 public class SaleHandler : Notifiable,
     IHandler<BeginNewSale>,
-   // IHandler<CancelSale>,
-   // IHandler<FinishSale>,
+    IHandler<CancelSale>,
+    IHandler<FinishSale>,
     IHandler<IncludeItemsToTheSale>
 
 {
@@ -55,14 +55,20 @@ public class SaleHandler : Notifiable,
         if (command.Invalid)
             return new CommandResult(false, "Please, check yor sale details carefully!", command.Notifications);
 
+        var items = new Items(
+           command.Item.Id,
+           command.Item.Quantity
+           ); 
+
+        var products = new Products(
+            command.Product.Id
+            );
+
         var sale = new Sales(
             command.Id,
-            command.Date,
-            command.Item,
-            command.Product,
+            items,
+            products,
             command.TotalSaleValue,
-            command.TotalSalePaid,
-            command.SaleChange,
             command.SaleStatus = (SaleStatus)1
             );
 
@@ -71,22 +77,32 @@ public class SaleHandler : Notifiable,
         return new CommandResult(true, "Sale started successfully", sale);
     }
 
-    /*public ICommandResult Handle(FinishSale command)
+    public ICommandResult Handle(FinishSale command)
     {
         command.Validate();
         if (command.Invalid)
             return new CommandResult(false, "Please, check yor sale details carefully!", command.Notifications);
 
+        var items = new Items(
+         command.Items.Id,
+         command.Items.UnityPrice,
+         command.Items.Total
+         );
+
+        var products = new Products(
+            command.Product.Id
+            );
+
         var sale = new Sales(
            command.Id,
-           command.Date,
-           command.TotalSaleValue,
+           items,
+           products,
            command.TotalSalePaid,
            command.SaleChange,
            command.SaleStatus = (SaleStatus)2
            );
 
-        _saleRepository.Finish(sale);
+        _repository.Update(sale);
 
         return new CommandResult(true, "Sale started successfully", sale);
     }
@@ -95,19 +111,15 @@ public class SaleHandler : Notifiable,
     {
         command.Validate();
         if (command.Invalid)
-            return new CommandResult(false, "Please, check yor sale details carefully!", command.Notifications);
+            return new CommandResult(false, "Please, check your sale status carefully carefully!", command.Notifications);
 
         var sale = new Sales(
            command.Id,
-           command.Date,
-           command.TotalSaleValue,
-           command.TotalSalePaid,
-           command.SaleChange,
            command.SaleStatus = (SaleStatus)3
            );
 
-        _saleRepository.Cancel(sale);
+        _repository.Update(sale);
 
-        return new CommandResult(true, "Sale started successfully", sale);
-    }  */
+        return new CommandResult(true, "Sale cacelled successfully", sale);
+    }  
 }

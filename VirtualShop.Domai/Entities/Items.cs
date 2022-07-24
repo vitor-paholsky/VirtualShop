@@ -34,4 +34,14 @@ public class Items
     {
         Id = id;
     }
+
+    public Items(int id, double quantity)
+    {
+        Id = id;
+        Quantity = quantity;
+    }
+
+    public Items(int id, decimal unityPrice, double total) : this(id)
+    {
+    }
 }

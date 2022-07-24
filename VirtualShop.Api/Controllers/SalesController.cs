@@ -23,16 +23,16 @@ public class SalesController : ControllerBase
             [FromBody] BeginNewSale command,
             [FromServices] SaleHandler handler
             )
-        {
+    {
         var items = new Items();
         {
             items.Id = command.Id;
         }
 
-            var sales = new Sales();
+        var sales = new Sales();
         {
             sales.Date = new DateTime();
-            handler.Handle(command);     
+            handler.Handle(command);
 
             return (CommandResult)handler.Handle(command);
         }
@@ -47,25 +47,51 @@ public class SalesController : ControllerBase
     {
         var items = new Items();
         {
+            items.Id = command.Item.Id;
             items.Quantity = command.Item.Quantity;
-            items.UnityPrice = command.Item.UnityPrice;
-            items.Total = command.Item.Total;
             handler.Handle(command);
 
             var products = new Products();
             {
-                products.Description = command.Product.Description;
-                products.UnitPrice = command.Product.UnitPrice;
+                products.Id = command.Product.Id;
                 products.StockQuantity = command.Product.StockQuantity;
                 handler.Handle(command);
-
-                var stock = _service.CalculateStockQuantity;
-
             }
 
             var sales = new Sales();
             {
                 sales.TotalSaleValue = command.TotalSaleValue;
+                handler.Handle(command);
+            }
+
+            return (CommandResult)handler.Handle(command);
+        }
+    }
+
+    [Route("finish/sales")]
+    [HttpPut]
+    public CommandResult Finish(
+    [FromBody] FinishSale command,
+    [FromServices] SaleHandler handler
+    )
+    {
+        var items = new Items();
+        {
+            items.Id = command.Items.Id;
+            items.Quantity = command.Items.Quantity;
+            handler.Handle(command);
+
+            var stock = _service.CalculateStockQuantity;
+
+            var products = new Products();
+            {
+                products.Id = command.Product.Id;
+                products.StockQuantity = command.Product.StockQuantity;
+                handler.Handle(command);
+            }
+
+            var sales = new Sales();
+            {
                 sales.TotalSalePaid = command.TotalSalePaid;
                 sales.SaleChange = command.SaleChange;
                 handler.Handle(command);
@@ -74,4 +100,22 @@ public class SalesController : ControllerBase
             return (CommandResult)handler.Handle(command);
         }
     }
-}
+
+    [Route("cancel/sales")]
+    [HttpPut]
+    public CommandResult Cancel(
+    [FromBody] CancelSale command,
+    [FromServices] SaleHandler handler
+    )
+    {
+        var sales = new Sales();
+        {
+            sales.Id = command.Id;
+            sales.SaleStatus = command.SaleStatus;
+        }
+
+            return (CommandResult)handler.Handle(command);
+        }
+    }
+
+

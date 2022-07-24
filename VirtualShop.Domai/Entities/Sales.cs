@@ -39,10 +39,12 @@ public class Sales
     {
     }
 
-    public Sales(int id, DateTime date, SaleStatus saleStatus)
+    public Sales(int id, Items items, Products products, decimal totalSaleValue, SaleStatus saleStatus)
     {
         Id = id;
-        Date = date;
+        Items = items;
+        Products = products;
+        TotalSaleValue = totalSaleValue;
         SaleStatus = saleStatus;
     }
 
@@ -52,6 +54,22 @@ public class Sales
         Date = date;
         Items = items;
         Products = products;
+        SaleStatus = saleStatus;
+    }
+
+    public Sales(int id, Items items, Products products, decimal totalSalePaid, decimal saleChange, SaleStatus saleStatus)
+    {
+        Id = id;
+        Items = items;
+        Products = products;
+        TotalSalePaid = totalSalePaid;
+        SaleChange = saleChange;
+        SaleStatus = saleStatus;
+    }
+
+    public Sales(int id, SaleStatus saleStatus)
+    {
+        Id = id;
         SaleStatus = saleStatus;
     }
 }
