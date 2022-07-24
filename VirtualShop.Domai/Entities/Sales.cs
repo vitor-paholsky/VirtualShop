@@ -17,12 +17,13 @@ public class Sales
     public DateTime Date { get; set; }   
     public Items Items { get; set; }
     public Products Products { get; set; }
-    public double TotalSaleValue { get; set; }
-    public double TotalSalePaid { get; set; }
-    public double SaleChange { get; set; }
+    public decimal TotalSaleValue { get; set; }
+    public decimal TotalSalePaid { get; set; }
+    public decimal SaleChange { get; set; }
     public SaleStatus SaleStatus { get; set; }
 
-    public Sales(int id, DateTime date, Items items, Products products, double totalSaleValue, double totalSalePaid, double saleChange, SaleStatus saleStatus)
+
+    public Sales(int id, DateTime date, Items items, Products products, decimal totalSaleValue, decimal totalSalePaid, decimal saleChange, SaleStatus saleStatus)
     {
         Id = id;
         Date = date;
@@ -36,5 +37,21 @@ public class Sales
 
     public Sales()
     {
+    }
+
+    public Sales(int id, DateTime date, SaleStatus saleStatus)
+    {
+        Id = id;
+        Date = date;
+        SaleStatus = saleStatus;
+    }
+
+    public Sales(int id, DateTime date, Items items, Products products, SaleStatus saleStatus)
+    {
+        Id = id;
+        Date = date;
+        Items = items;
+        Products = products;
+        SaleStatus = saleStatus;
     }
 }

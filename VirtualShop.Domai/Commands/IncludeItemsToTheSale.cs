@@ -16,16 +16,16 @@ public class IncludeItemsToTheSale : Notifiable, ICommand
     public DateTime Date { get; set; }
     public Items Item { get; set; }
     public Products Product { get; set; }
-    public double TotalSaleValue { get; set; }
-    public double TotalSalePaid { get; set; }
-    public double SaleChange { get; set; }
+    public decimal TotalSaleValue { get; set; }
+    public decimal TotalSalePaid { get; set; }
+    public decimal SaleChange { get; set; }
     public SaleStatus SaleStatus { get; set; }
 
     public IncludeItemsToTheSale()
     {
     }
 
-    public IncludeItemsToTheSale(int id, DateTime date, Items item, Products product, double totalSaleValue, double totalSalePaid, double saleChange, SaleStatus saleStatus)
+    public IncludeItemsToTheSale(int id, DateTime date, Items item, Products product, decimal totalSaleValue, decimal totalSalePaid, decimal saleChange, SaleStatus saleStatus)
     {
         Id = id;
         Date = date;

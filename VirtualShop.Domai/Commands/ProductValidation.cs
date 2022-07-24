@@ -13,10 +13,10 @@ public class ProductValidation : Notifiable, ICommand
 {
     public int Id { get; set; }
     public string Description { get; set; }
-    public double UnitPrice { get; set; }
+    public decimal UnitPrice { get; set; }
     public double StockQuantity { get; set; }
 
-    public ProductValidation(int id, string description, double unitPrice, double stockQuantity)
+    public ProductValidation(int id, string description, decimal unitPrice, double stockQuantity)
     {
         Id = id;
         Description = description;

@@ -28,18 +28,19 @@ public class SaleHandler : Notifiable,
 
     public ICommandResult Handle(BeginNewSale command)
     {
-        command.Validate();
-        if (command.Invalid)
-            return new CommandResult(false, "Please, check yor sale details carefully!", command.Notifications);
+        var items = new Items(
+            command.Id
+            );
 
-        var sale = new Sales(
+        var products = new Products(
+            command.Id
+            );
+
+        var sale = new Sales(            
             command.Id,
             command.Date,
-            command.Item,
-            command.Product,
-            command.TotalSaleValue,
-            command.TotalSalePaid,
-            command.SaleChange,
+            items,
+            products,
             command.SaleStatus = (SaleStatus)1
             );
 
@@ -65,7 +66,7 @@ public class SaleHandler : Notifiable,
             command.SaleStatus = (SaleStatus)1
             );
 
-        _repository.Create(sale);
+        _repository.Update(sale);
 
         return new CommandResult(true, "Sale started successfully", sale);
     }

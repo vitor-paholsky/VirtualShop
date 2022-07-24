@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualShop.Domain", "Virtu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualShop.Infra", "VirtualShop.Infra\VirtualShop.Infra.csproj", "{A1DC24D3-27F0-4311-8E57-051773408278}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualShop.Domain.Tests", "VirtualShop.Domain.Tests\VirtualShop.Domain.Tests.csproj", "{366F306F-9F34-4D41-93B5-44D6976A7D95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualShop.Domain.Tests", "VirtualShop.Domain.Tests\VirtualShop.Domain.Tests.csproj", "{366F306F-9F34-4D41-93B5-44D6976A7D95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualShop.Application", "VirtualShop.Application\VirtualShop.Application.csproj", "{DBABE4F2-46BB-441D-B45C-357D7875CA29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{366F306F-9F34-4D41-93B5-44D6976A7D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{366F306F-9F34-4D41-93B5-44D6976A7D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{366F306F-9F34-4D41-93B5-44D6976A7D95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBABE4F2-46BB-441D-B45C-357D7875CA29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBABE4F2-46BB-441D-B45C-357D7875CA29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBABE4F2-46BB-441D-B45C-357D7875CA29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBABE4F2-46BB-441D-B45C-357D7875CA29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,37 +13,24 @@ namespace VirtualShop.Domain.Commands;
 public class BeginNewSale : Notifiable, ICommand
 {
     public int Id { get; set; }
-    public DateTime Date { get; set; }
     public Items Item { get; set; }
-    public Products Product { get; set; }
-    public double TotalSaleValue { get; set; }
-    public double TotalSalePaid { get; set; }
-    public double SaleChange { get; set; }
+    public DateTime Date { get; set; }
     public SaleStatus SaleStatus { get; set; }
 
-    public BeginNewSale(int id, DateTime date, Items item, Products product, double totalSaleValue, double totalSalePaid, double saleChange, SaleStatus saleStatus)
+    public BeginNewSale(int id, Items item, DateTime date, SaleStatus saleStatus)
     {
         Id = id;
-        Date = date;
         Item = item;
-        Product = product;
-        TotalSaleValue = totalSaleValue;
-        TotalSalePaid = totalSalePaid;
-        SaleChange = saleChange;
+        Date = date;
         SaleStatus = saleStatus;
     }
 
     public BeginNewSale()
     {
     }
-    
+
     public void Validate()
     {
-        AddNotifications(
-            new Contract()
-                .Requires()              
-                .IsGreaterThan(TotalSaleValue, 0, "TotalSaleValue", "Total value should be higher than 0")
-                .IsGreaterThan(TotalSalePaid, 0, "TotalSalePaid", "Total value paid should be higher than 0")
-       );
+        throw new NotImplementedException();
     }
 }

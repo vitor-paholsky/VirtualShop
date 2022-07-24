@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using VirtualShop.Application.Services;
+using VirtualShop.Domain.Commands.Contracts;
 using VirtualShop.Domain.Handlers;
 using VirtualShop.Domain.Repositories;
 using VirtualShop.Infra.Contexts;
@@ -20,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<ISaleRepository, SaleRepository>();
+builder.Services.AddTransient<ISaleContract, SalesService>();
 builder.Services.AddTransient<SaleHandler, SaleHandler>();
 builder.Services.AddTransient<IProductsRepository, ProductRepository>();
 builder.Services.AddTransient<ProductHandler, ProductHandler>();

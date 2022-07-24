@@ -14,4 +14,5 @@ public interface IProductsRepository
     void Delete(Products products);
     Products GetProductById(int id);
     IEnumerable<Products> GetByDescription(string description);
+    IEnumerable<Products> GetStock(double StockQuantity);
 }

@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VirtualShop.Application\VirtualShop.Application.csproj" />
     <ProjectReference Include="..\VirtualShop.Domai\VirtualShop.Domain.csproj" />
   </ItemGroup>
 

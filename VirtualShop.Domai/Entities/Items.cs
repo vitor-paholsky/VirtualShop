@@ -15,10 +15,10 @@ public class Items
 {
     public int Id { get; set; }
     public double  Quantity { get; set; }
-    public double UnityPrice { get; set; }
+    public decimal UnityPrice { get; set; }
     public double Total { get; set; }
 
-    public Items(int id, double quantity, double unityPrice, double total)
+    public Items(int id, double quantity, decimal unityPrice, double total)
     {
         Id = id;     
         Quantity = quantity;
@@ -28,5 +28,10 @@ public class Items
 
     public Items()
     {
+    }
+
+    public Items(int id)
+    {
+        Id = id;
     }
 }

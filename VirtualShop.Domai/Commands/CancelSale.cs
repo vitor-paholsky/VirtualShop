@@ -16,15 +16,15 @@ public class CancelSale : Notifiable, ICommand
     public Guid Id { get; set; }
     public DateTime Date { get; set; }
     public Items Items { get; set; }
-    public double TotalSaleValue { get; set; }
-    public double TotalSalePaid { get; set; }
-    public double SaleChange { get; set; }
+    public decimal TotalSaleValue { get; set; }
+    public decimal TotalSalePaid { get; set; }
+    public decimal SaleChange { get; set; }
     public SaleStatus SaleStatus { get; set; }
     public CancelSale()
     {
     }
 
-    public CancelSale(Guid id, DateTime date, Items items, double totalSaleValue, double totalSalePaid, double saleChange)
+    public CancelSale(Guid id, DateTime date, Items items, decimal totalSaleValue, decimal totalSalePaid, decimal saleChange)
     {
         Id = id;
         Date = date;

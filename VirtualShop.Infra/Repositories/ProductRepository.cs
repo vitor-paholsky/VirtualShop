@@ -47,4 +47,9 @@ public class ProductRepository : IProductsRepository
     {
         return _context.Products.Where(ProductQueries.GetAllByDescription(description)).OrderBy(x => x.StockQuantity);
     }
+
+    public IEnumerable<Products> GetStock(double StockQuantity)
+    {
+        return _context.Products.Where(ProductQueries.GetStock(StockQuantity)).OrderBy(x => x.StockQuantity); 
+    }
 }

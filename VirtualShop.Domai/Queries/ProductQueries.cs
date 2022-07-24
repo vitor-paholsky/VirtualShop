@@ -14,4 +14,9 @@ public class ProductQueries
     {
         return x => x.Description == description;
     }
+
+    public static Expression<Func<Products, bool>> GetStock(double StockQuantity)
+    {
+        return x => x.StockQuantity == StockQuantity;
+    }
 }
