@@ -67,6 +67,13 @@ public class Sales
         SaleStatus = saleStatus;
     }
 
+    public Sales(int id, DateTime date, SaleStatus saleStatus)
+    {
+        Id = id;
+        Date = date;
+        SaleStatus = saleStatus;
+    }
+
     public Sales(int id, SaleStatus saleStatus)
     {
         Id = id;

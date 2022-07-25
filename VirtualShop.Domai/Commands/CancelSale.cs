@@ -26,10 +26,11 @@ public class CancelSale : Notifiable, ICommand
 
     public void Validate()
     {
-        AddNotifications(
-            new Contract()
-                .Requires()
-                .AreEquals(1, 1, "SaleStatus", "Only sales with openned status can be cancelled")
-       );
+        if(SaleStatus != SaleStatus.Open)
+            AddNotifications(
+                new Contract()
+                    .Requires()
+                    .IsFalse(true, "SaleStatus", "Only products with openned status can be cancelled!")
+        );
     }
 }

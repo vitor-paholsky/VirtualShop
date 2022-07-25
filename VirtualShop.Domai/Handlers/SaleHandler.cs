@@ -28,7 +28,7 @@ public class SaleHandler : Notifiable,
 
     public ICommandResult Handle(BeginNewSale command)
     {
-        var items = new Items(
+         var items = new Items(
             command.Id
             );
 
@@ -120,6 +120,6 @@ public class SaleHandler : Notifiable,
 
         _repository.Update(sale);
 
-        return new CommandResult(true, "Sale cacelled successfully", sale);
+        return new CommandResult(true, "Sale cancelled successfully", sale);
     }  
 }

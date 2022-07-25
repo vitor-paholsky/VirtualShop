@@ -39,7 +39,7 @@ public class SalesController : ControllerBase
     }
 
     [Route("include/items")]
-    [HttpPut]
+    [HttpPost]
     public CommandResult Include(
         [FromBody] IncludeItemsToTheSale command,
         [FromServices] SaleHandler handler
@@ -69,7 +69,7 @@ public class SalesController : ControllerBase
     }
 
     [Route("finish/sales")]
-    [HttpPut]
+    [HttpPost]
     public CommandResult Finish(
     [FromBody] FinishSale command,
     [FromServices] SaleHandler handler

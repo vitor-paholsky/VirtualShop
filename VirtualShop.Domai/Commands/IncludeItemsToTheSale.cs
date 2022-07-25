@@ -38,7 +38,7 @@ public class IncludeItemsToTheSale : Notifiable, ICommand
         AddNotifications(
             new Contract()
                 .Requires()
-                .IsLowerThan(TotalSaleValue, 0, "TotalSaleValue", "Total value should be higher than 0")
+                .IsGreaterThan(TotalSaleValue, 0, "TotalSaleValue", "Total value should be higher than 0")
        );
     }
 }

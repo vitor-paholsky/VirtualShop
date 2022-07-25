@@ -33,10 +33,11 @@ public class FinishSale : Notifiable, ICommand
 
     public void Validate()
     {
-        AddNotifications(
-            new Contract()
-                .Requires()
-                .IsLowerThan(TotalSalePaid, 0, "TotalSalePaid", "Total value paid should be higher than 0")
+        if (SaleStatus != SaleStatus.Open)
+            AddNotifications(
+                new Contract()
+                    .Requires()
+                    .IsFalse(true, "SaleStatus", "Only sales with openned sale status can be finished!")
        );
     }
 }
